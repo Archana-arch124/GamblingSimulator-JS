@@ -8,6 +8,7 @@ class Utility{
     }    
 
     main_Simulation = () => {
+        while(this.dailyMergin != 150 && this.dailyMergin != 50) {
 
         let Result = this.check_WinORLose();
 
@@ -17,9 +18,14 @@ class Utility{
             }
             if(Result == 0) {
                 this.dailyStake -= 1;
-                console.log(`\n  GAMBLER LoOSE `)
+                console.log(`\n  GAMBLER LOOSE `)
             }
     }
+    if(this.dailyStake == 150)
+    console.log(`\n  Gambler Win 50% Of Stake!!`);
+else   
+    console.log(`\n  Gambler Loose 50% Of Stake!!`);
+}
 }
 
 module.exports = new Utility();
