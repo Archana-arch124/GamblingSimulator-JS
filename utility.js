@@ -8,7 +8,7 @@ class Utility{
     }    
 
     main_Simulation = () => {
-        while(this.dailyMergin != 150 && this.dailyMergin != 50) {
+        while(this.dailyStake != 150 && this.dailyStake != 50) {
 
         let Result = this.check_WinORLose();
 
