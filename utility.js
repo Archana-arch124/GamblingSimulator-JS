@@ -30,6 +30,10 @@ class Utility{
             let winAmount = winStake - this.dailyStake;
             let lostAmount= this.dailyStake - lostStake;
             console.log(` \n  Day: ${this.Day}, Win Amount : ${winAmount}, Lost Amount : ${lostAmount}`);  
+            if(winAmount > lostAmount) 
+                console.log(`\n=> Day: ${this.Day} Win By ${winAmount-lostAmount}`);
+            else
+                console.log(`\n Day: ${this.Day} Lost By ${winAmount-lostAmount}`);
             this.Day = this.Day+1;
 }
 }
