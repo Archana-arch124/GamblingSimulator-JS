@@ -23,11 +23,11 @@ class Utility {
                 stakeArr[day - 1] = stake;
                 console.log("Player Loose" + "\tDay:" + day + "\tStake = " + stake);
             }
-            /*if (stake <= 0) {
+            if (stake <= 0) {
                 console.log("\nOn Day" + day + " Player Resign for the day");
                 break;
             }
-            stake += 100;*/
+           // stake += 100;
         }
         this.profitLoss();
     }
