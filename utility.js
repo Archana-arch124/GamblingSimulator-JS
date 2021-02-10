@@ -1,42 +1,70 @@
-class Utility{
+let stake = 100;
+let totalWin = 0;
+let totalLoss = 0;
+const bett = 1;
+const days = 20;
+let stakeArr = [];
 
-    dailyStake = 100;
-    everyDayBet = 1;
-    Day=1;
-    check_WinORLose = () => {
-        return Math.floor(Math.random()* 2);
-    }    
-
-    main_Simulation = () => {
-        
-        while(this.Day <= 20){
-
-            var winStake = 100;
-            var lostStake = 100;
-
-        while(this.dailyStake != 150 && this.dailyStake != 50) {
-
-        let Result = this.check_WinORLose();
-
-            if(Result == 1) {
-                this.dailyStake += 1;
-                console.log(`\n  GAMBLER WINS `)
+class Utility {
+    gamble = () => {
+        for (let day = 1; day <= days; day++) {
+            let bet = Math.floor(Math.random() * 2);
+            if (bet == bett) {
+                stake++;
+                stake = Math.floor(stake + (stake / 2));
+                totalWin = totalWin + (stake / 2);
+                stakeArr[day - 1] = stake;
+                console.log("Player Wins" + "\tDay:" + day + "\tStake = " + stake);
             }
-            if(Result == 0) {
-                this.dailyStake -= 1;
-                console.log(`\n  GAMBLER LOOSE `)
+            else {
+                stake--;
+                stake = Math.floor(stake / 2);
+                totalLoss = totalLoss + (stake / 2);
+                stakeArr[day - 1] = stake;
+                console.log("Player Loose" + "\tDay:" + day + "\tStake = " + stake);
             }
+            /*if (stake <= 0) {
+                console.log("\nOn Day" + day + " Player Resign for the day");
+                break;
+            }
+            stake += 100;*/
+        }
+        this.profitLoss();
     }
-            let winAmount = winStake - this.dailyStake;
-            let lostAmount= this.dailyStake - lostStake;
-            console.log(` \n  Day: ${this.Day}, Win Amount : ${winAmount}, Lost Amount : ${lostAmount}`);  
-            if(winAmount > lostAmount) 
-                console.log(`\n=> Day: ${this.Day} Win By ${winAmount-lostAmount}`);
-            else
-                console.log(`\n Day: ${this.Day} Lost By ${winAmount-lostAmount}`);
-            this.Day = this.Day+1;
-}
-}
+    profitLoss() {
+        if (totalWin > totalLoss) {
+            console.log("Total Amount Won By Player = " + (totalWin - totalLoss));
+        }
+        else {
+            console.log("Total Amount Loose By Player = " + (totalLoss - totalWin));
+        }
+    }
+    unLuckyDay() {
+        let maxLoss = 0;
+        let unLuckyDay = 0;
+        for (let j = 0; j < stakeArr.length - 1; j++) {
+            if (stakeArr[j] > stakeArr[j + 1]) {
+                if ((stakeArr[j] - stakeArr[j + 1]) > maxLoss) {
+                    maxLoss = Math.floor(stakeArr[j] - stakeArr[j + 1]);
+                    unLuckyDay = j + 2;
+                }
+            }
+        }
+        console.log("Unluckiest Loss = " + maxLoss + "\nUnlucky Day " + unLuckyDay);
+    }
+    luckyDay() {
+        let maxProfit = 0;
+        let LuckyDay = 0;
+        for (let j = 0; j < stakeArr.length - 1; j++) {
+            if (stakeArr[j] < stakeArr[j + 1]) {
+                if ((stakeArr[j + 1] - stakeArr[j]) > maxProfit) {
+                    maxProfit = Math.floor(stakeArr[j + 1] - stakeArr[j]);
+                    LuckyDay = j + 2;
+                }
+            }
+        }
+        console.log("luckiest Profit = " + maxProfit + "\nlucky Day " + LuckyDay);
+    }
 }
 
-module.exports = new Utility();
+module.exports = new Utility;
